@@ -11,7 +11,6 @@ public class Participant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long userid2;
     private String name;
 
     public long getId() {
@@ -20,14 +19,6 @@ public class Participant {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getUserid2() {
-        return userid2;
-    }
-
-    public void setUserid2(long userid2) {
-        this.userid2 = userid2;
     }
 
     public String getName() {
@@ -50,5 +41,9 @@ public class Participant {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "event_id", referencedColumnName = "id")
     private Event event;
+
+    public void assignEvent(Event event) {
+        this.event = event;
+    }
 
 }

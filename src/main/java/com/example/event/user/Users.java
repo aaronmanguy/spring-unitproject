@@ -3,6 +3,8 @@ package com.example.event.user;
 import com.example.event.event.Event;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -71,7 +73,12 @@ public class Users {
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<Event> UserEvent;
+    private Set<Event> UserEvent = new HashSet<>();
+
+    public void addeventtouser(Event event) {
+        UserEvent.add(event);
+    }
+
 }
 
 

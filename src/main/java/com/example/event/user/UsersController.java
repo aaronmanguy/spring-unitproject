@@ -24,8 +24,8 @@ public class UsersController {
     Users createUser(@RequestBody Users user) {return usersRepository.save(user);}
 
     @Transactional
-    @PutMapping
-    Users updateUser(@RequestBody Users user) {return usersRepository.save(user);}
+    @PutMapping("/{userid}")
+    Users updateUser(@PathVariable long userid, @RequestBody Users user) { return usersRepository.findById(userid).get();}
 
     @Transactional
     @DeleteMapping("/{id}")

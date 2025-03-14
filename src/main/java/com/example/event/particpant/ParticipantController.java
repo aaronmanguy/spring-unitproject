@@ -18,6 +18,8 @@ public class ParticipantController {
 
     @Autowired
     ParticipantRepository participantRepository;
+    @Autowired
+    EventRepository eventRepository;
 
     @GetMapping
     List<Participant> getParticipants() { return participantRepository.findAll(); }
@@ -28,6 +30,19 @@ public class ParticipantController {
     @Transactional
     @PostMapping
     Participant createParticipant(@RequestBody Participant participant) { return participantRepository.save(participant); }
+
+    @PutMapping("/{eventId}/participant/{participantId}")
+    Participant assignParticipantToEvent(
+            @PathVariable long eventId,
+            @PathVariable long participantId
+    ) {
+        Participant participant = participantRepository.findById(participantId).get();
+        Event event = eventRepository.findById(eventId).get();
+
+        participant.assignEvent(event);
+
+        return participantRepository.save(participant);
+    }
 
     @Transactional
     @DeleteMapping("/{parid}")

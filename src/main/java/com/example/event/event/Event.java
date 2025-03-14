@@ -70,8 +70,4 @@ public class Event {
 
     public Set<Participant> getParticipant() {return participant;}
 
-
-
-
-
 }
